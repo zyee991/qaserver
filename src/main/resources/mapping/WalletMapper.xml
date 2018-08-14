@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcuc.qaserver.mapper.WalletMapper">
+  <resultMap id="BaseResultMap" type="com.itcuc.qaserver.model.Wallet">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="point" jdbcType="DOUBLE" property="point" />
+    <result column="cny" jdbcType="DOUBLE" property="cny" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, point, cny
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_account_wallet
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_account_wallet
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.itcuc.qaserver.model.Wallet">
+    insert into t_account_wallet (id, user_id, point, cny
+      )
+    values (#{id,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, #{point,jdbcType=DOUBLE}, #{cny,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itcuc.qaserver.model.Wallet">
+    insert into t_account_wallet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="point != null">
+        point,
+      </if>
+      <if test="cny != null">
+        cny,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="point != null">
+        #{point,jdbcType=DOUBLE},
+      </if>
+      <if test="cny != null">
+        #{cny,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itcuc.qaserver.model.Wallet">
+    update t_account_wallet
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="point != null">
+        point = #{point,jdbcType=DOUBLE},
+      </if>
+      <if test="cny != null">
+        cny = #{cny,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itcuc.qaserver.model.Wallet">
+    update t_account_wallet
+    set user_id = #{userId,jdbcType=CHAR},
+      point = #{point,jdbcType=DOUBLE},
+      cny = #{cny,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
